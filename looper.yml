@@ -1,0 +1,23 @@
+tools:
+  jdk: 8
+  maven: 3.5.0
+  ant: 1.9.7
+
+flows:
+  default(ui Build):
+    - exposeVars(maven)
+    - mvn clean install
+
+  docker-deploy(ui Deploy):
+    - node(docker-daemon):
+        - mvn clean install
+        - dockerImage:
+            tags:
+              - 'devmembershipregistry.azurecr.io/soldinfield'
+            push: true
+            baseDir: './'
+            buildArgs:
+              APPSETTING_RUNTIME_ENVIRONMENT: DEV
+              rootuser: ${c286d1a6-d227-4cdc-a02f-c4da19caec1f}
+            creds:
+              devmembershipregistry.azurecr.io: '1c1a20f4-0812-4858-b14e-e734753f63ad'
