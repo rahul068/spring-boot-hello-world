@@ -19,12 +19,12 @@ jobs:
         with:
           java-version: 11.0.4
       - name: Build Project
-        run: mvn -B clean deploy -DskipTests > artifact
+        run: mvn -B clean deploy -DskipTests
 
       - shell: bash
         run: |
           expr 3 + 7 > artifact.txt
-      - name: Upload math result for job 1
+      - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: artifact
