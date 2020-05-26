@@ -18,7 +18,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11.0.4
+<<<<<<< Updated upstream
       - name: Publish artifact on GitHub Packages
         run: mvn -B clean install -DskipTests
+=======
+      - name: Build Project
+        run: mvn -B clean deploy -DskipTests > artifact
+>>>>>>> Stashed changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: artifact
+          path: artifact
