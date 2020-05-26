@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: 11.0.4
       - name: Build Project
-        run: mvn -B clean deploy -DskipTests
+        run: mvn -B clean install -DskipTests
 
       - shell: bash
         run: |
